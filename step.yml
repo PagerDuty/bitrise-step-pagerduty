@@ -102,12 +102,14 @@ outputs:
     opts:
       title: "PagerDuty event creation message"
       summary: "The message returned by the PagerDuty Events API"
-      description:
+      description: "The PagerDuty Events API will return a 'message' which indicates the result of the operation."
   - PAGERDUTY_INCIDENT_KEY:
     opts:
-      title: "PgerDuty event creation incident_key"
+      title: "PagerDuty event creation incident_key"
       summary: "The incident key returned by the PagerDuty Events API v1"
+      description: "The PagerDuty Events API v1 will return a 'incident_key' which identifies the incident."
   - PAGERDUTY_DEDUP_KEY:
     opts:
-      title: "PgerDuty event creation dedup_key"
+      title: "PagerDuty event creation dedup_key"
       summary: "The deduplication key returned by the PagerDuty Events API v2"
+      description: "The PagerDuty Events API v2 will return a 'dedup_key' which can be used to group alerts into a single incident."

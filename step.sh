@@ -23,6 +23,20 @@ if [ ${api_version} == "v1" ]; then
     }
 EOF
 
+    CURL_RESULT=$?
+    if test "$CURL_RESULT" != "0"; then
+        echo "curl returned $CURL_RESULT"
+        cat v1-output.json
+        exit 1
+    fi
+
+    PD_STATUS=$(cat v1-output.json | jq '.status')
+    if test "$PD_STATUS" != '"success"'; then
+        echo "Event was not created."
+        cat v1-output.json
+        exit 1
+    fi
+
     PD_MESSAGE=$(cat v1-output.json | jq '.message')
     PD_INCIDENT_KEY=$(cat v1-output.json | jq '.incident_key')
     envman add --key PAGERDUTY_EVENT_MESSAGE --value "$PD_MESSAGE"
@@ -53,6 +67,20 @@ elif [ ${api_version} == "v2" ]; then
         }
     }
 EOF
+
+    CURL_RESULT=$?
+    if test "$CURL_RESULT" != "0"; then
+        echo "curl returned $CURL_RESULT"
+        cat v2-output.json
+        exit 1
+    fi
+
+    PD_STATUS=$(cat v2-output.json | jq '.status')
+    if test "$PD_STATUS" != '"success"'; then
+        echo "Event was not created."
+        cat v2-output.json
+        exit 1
+    fi
 
     PD_MESSAGE=$(cat v2-output.json | jq '.message')
     PD_DEDUP_KEY=$(cat v2-output.json | jq '.dedup_key')
