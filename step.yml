@@ -66,7 +66,7 @@ inputs:
       is_sensitive: true
       is_required: true
       value_options: []
-  - description:
+  - event_description:
     opts:
       title: "Event description"
       summary: "The description that the event will be created with"

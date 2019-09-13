@@ -11,7 +11,7 @@ if [ ${api_version} == "v1" ]; then
     {
         "service_key": "${integration_key}",
         "event_type": "trigger",
-        "description": "${description}",
+        "description": "${event_description}",
         "client": "Bitrise CI",
         "client_url": "${BITRISE_BUILD_URL}",
         "details": {
@@ -55,7 +55,7 @@ elif [ ${api_version} == "v2" ]; then
         "client": "Bitrise CI",
         "client_url": "${BITRISE_BUILD_URL}",
         "payload": {
-            "summary": "${description}",
+            "summary": "${event_description}",
             "source": "${BITRISE_BUILD_URL}",
             "severity": "${severity}",
             "custom_details": {
