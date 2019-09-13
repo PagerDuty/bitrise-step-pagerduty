@@ -12,7 +12,7 @@ title: |-
 summary: |
   Create a PagerDuty alert
 description: |
-  This step creates a PagerDuty alert with specific parameters.
+  This step creates a PagerDuty alert with specific parameters. It can use Events API v1 or v2.
 website: https://github.com/PagerDuty/bitrise-step-pagerduty
 source_code_url: https://github.com/PagerDuty/bitrise-step-pagerduty
 support_url: https://github.com/PagerDuty/bitrise-step-pagerduty/issues
@@ -35,21 +35,23 @@ deps:
   brew:
   - name: git
   - name: wget
+  - name: jq
   apt_get:
   - name: git
   - name: wget
   - name: curl
+  - name: jq
 
 toolkit:
   bash:
     entry_file: step.sh
 
 inputs:
-  - api_version:
+  - api_version: v2
     opts:
       title: "API version"
-      summary: Events API v1 or v2 (available in the Integrations tab of the Service Details)
-      description:
+      summary: "Events API v1 or v2 (available in the Integrations tab of the Service Details)"
+      description: "Events API v1 or v2 (available in the Integrations tab of the Service Details)."
       is_expand: false
       is_required: true
       value_options:
@@ -58,8 +60,8 @@ inputs:
   - integration_key:
     opts:
       title: "Integration key"
-      summary: The hexadecimal service key (available in the Integrations tab of the Service Details)
-      description:
+      summary: "The hexadecimal service key (available in the Integrations tab of the Service Details)"
+      description: "The hexadecimal service key (available in the Integrations tab of the Service Details)."
       is_expand: true
       is_sensitive: true
       is_required: true
@@ -67,16 +69,16 @@ inputs:
   - description:
     opts:
       title: "Event description"
-      summary: The description that the event will be created with
-      description:
+      summary: "The description that the event will be created with"
+      description: "The description that the event will be created with."
       is_expand: true
       is_required: true
       value_options: []
   - severity:
     opts:
       title: "Event severity (API v2 only)"
-      summary: The severity that the event will be created with (relevant to Event Rules)
-      description:
+      summary: "The severity that the event will be created with (relevant to Event Rules)"
+      description: "The severity that the event will be created with (relevant to Event Rules)."
       is_expand: false
       is_required: false
       value_options:
@@ -84,23 +86,28 @@ inputs:
       - error
       - warning
       - info
-  - skip_if_build_is_passing:
+  - skip_if_build_is_passing: true
     opts:
       title: "Skip if the build is passing"
-      summary: Whether or not this step should be skipped if the build is passing
-      description: Usually you want this to be set to Yes.
+      summary: "Whether or not this step should be skipped if the build is passing"
+      description: "Whether or not this step should be skipped if the build is passing. Usually you want this to be set to true."
       is_expand: false
       is_required: true
       value_options:
-      - Yes
-      - No
+      - true
+      - false
 
 outputs:
-  - EXAMPLE_STEP_OUTPUT:
+  - PAGERDUTY_EVENT_MESSAGE:
     opts:
-      title: "Example Step Output"
-      summary: Summary. No more than 2-3 sentences.
-      description: |
-        Description of this output.
-
-        Can be Markdown formatted text.
+      title: "PagerDuty event creation message"
+      summary: "The message returned by the PagerDuty Events API"
+      description:
+  - PAGERDUTY_INCIDENT_KEY:
+    opts:
+      title: "PgerDuty event creation incident_key"
+      summary: "The incident key returned by the PagerDuty Events API v1"
+  - PAGERDUTY_DEDUP_KEY:
+    opts:
+      title: "PgerDuty event creation dedup_key"
+      summary: "The deduplication key returned by the PagerDuty Events API v2"

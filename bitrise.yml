@@ -43,8 +43,8 @@ workflows:
         - api_version: v2
         - integration_key: $PD_INTEGRATION_KEY_V2
         - description: "this build failed"
-        - skip_if_build_is_passing: No
-        # - severity: critical
+        - skip_if_build_is_passing: false
+        - severity: warning
     - script:
         inputs:
         - content: |
