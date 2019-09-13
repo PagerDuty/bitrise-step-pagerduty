@@ -74,7 +74,7 @@ inputs:
       is_expand: true
       is_required: true
       value_options: []
-  - severity:
+  - severity: error
     opts:
       title: "Event severity (API v2 only)"
       summary: "The severity that the event will be created with (relevant to Event Rules)"
