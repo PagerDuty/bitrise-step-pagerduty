@@ -34,11 +34,10 @@ run_if: ""
 deps:
   brew:
   - name: git
-  - name: wget
+  - name: curl
   - name: jq
   apt_get:
   - name: git
-  - name: wget
   - name: curl
   - name: jq
 
