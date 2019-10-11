@@ -29,7 +29,7 @@ type_tags:
 is_requires_admin_user: true
 is_always_run: true
 is_skippable: false
-run_if: ""
+run_if: '{{enveq "BITRISE_BUILD_STATUS" "0" | not}}'
 
 deps:
   brew:
@@ -79,22 +79,12 @@ inputs:
       summary: "The severity that the event will be created with (relevant to Event Rules)"
       description: "The severity that the event will be created with (relevant to Event Rules)."
       is_expand: false
-      is_required: false
+      is_required: true
       value_options:
       - critical
       - error
       - warning
       - info
-  - skip_if_build_is_passing: true
-    opts:
-      title: "Skip if the build is passing"
-      summary: "Whether or not this step should be skipped if the build is passing"
-      description: "Whether or not this step should be skipped if the build is passing. Usually you want this to be set to true."
-      is_expand: false
-      is_required: true
-      value_options:
-      - true
-      - false
 
 outputs:
   - PAGERDUTY_EVENT_MESSAGE:
