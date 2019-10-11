@@ -1,11 +1,6 @@
 #!/bin/bash
 set -ex
 
-if [ $BITRISE_BUILD_STATUS == "0" ] && [ ${skip_if_build_is_passing} == "true" ]; then
-    echo "Build is passing... skipping PagerDuty event creation."
-    exit 0
-fi
-
 if [ ${api_version} == "v1" ]; then
     curl -X POST https://events.pagerduty.com/generic/2010-04-15/create_event.json -o v1-output.json -d @- << EOF
     {

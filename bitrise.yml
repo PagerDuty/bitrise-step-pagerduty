@@ -31,6 +31,12 @@ workflows:
         inputs:
         - path: ./_tmp
         - is_create_path: true
+    - script:
+        title: Pass or fail the build
+        inputs:
+        - content: |
+            #!/bin/bash
+            /usr/bin/false
     - path::./:
         title: Step Test
         description: |-
@@ -38,12 +44,10 @@ workflows:
           you can overwrite it if you want to, just like we did below,
           but the step would use the default value specified in the `step.yml`
           file if you would not specify another value.
-        run_if: true
         inputs:
         - api_version: v2
         - integration_key: $PD_INTEGRATION_KEY_V2
         - event_description: "this build failed"
-        - skip_if_build_is_passing: false
         - severity: warning
     - script:
         inputs:
