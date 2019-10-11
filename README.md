@@ -1,6 +1,8 @@
 # PagerDuty
 
-This step creates a PagerDuty alert with specific parameters.
+This step creates a PagerDuty alert using the Events API (v1 or V2) using your integration key. The alert will link to your Bitrise build. You can specify the severity in the configuration.
+
+By default the `run_if` declares that the step will be **skipped** if the build is passing. Override `run_if: true` in your `bitrise.yml` if you want it to run anyway.
 
 
 ## How to use this Step
