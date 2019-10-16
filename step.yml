@@ -8,7 +8,7 @@
 # - Bitrise CLI guides: http://devcenter.bitrise.io/bitrise-cli/
 
 title: |-
-  PagerDuty
+  Create a PagerDuty alert
 summary: |
   Create a PagerDuty alert
 description: |
@@ -16,9 +16,6 @@ description: |
 website: https://github.com/PagerDuty/bitrise-step-pagerduty
 source_code_url: https://github.com/PagerDuty/bitrise-step-pagerduty
 support_url: https://github.com/PagerDuty/bitrise-step-pagerduty/issues
-host_os_tags:
-  - osx-10.10
-  - ubuntu-16.04
 
 # Type tags are used for categorizing steps, for easier step discovery in Step Libraries.
 # You can find more information about type tags in the Step Development Guideline:
@@ -33,17 +30,11 @@ run_if: '{{enveq "BITRISE_BUILD_STATUS" "0" | not}}'
 
 deps:
   brew:
-  - name: git
   - name: curl
   - name: jq
   apt_get:
-  - name: git
   - name: curl
   - name: jq
-
-toolkit:
-  bash:
-    entry_file: step.sh
 
 inputs:
   - api_version: v2
@@ -64,7 +55,6 @@ inputs:
       is_expand: true
       is_sensitive: true
       is_required: true
-      value_options: []
   - event_description:
     opts:
       title: "Event description"
@@ -72,7 +62,6 @@ inputs:
       description: "The description that the event will be created with."
       is_expand: true
       is_required: true
-      value_options: []
   - severity: error
     opts:
       title: "Event severity (API v2 only)"
